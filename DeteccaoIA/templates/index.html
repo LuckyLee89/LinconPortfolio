@@ -73,8 +73,8 @@
 
     {% if result_img %}
     <div class="result">
-      <h2>Resultado:</h2>
-      <img src="{{ result_img }}" alt="Imagem com detecção">
+	    <h2>Imagem enviada com sucesso: {{ result_img }}</h2>
+      <img src="/uploads/{{ result_img }}" width="300" alt="Imagem com detecção">
     </div>
     {% endif %}
   </div>
