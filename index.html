@@ -1,71 +1,106 @@
-estou editando meu portfolio, vou por os projetos que criei nos ultimos dias:
+<body>
+  <header>
+    <h1>Lincon Antunes Pereira</h1>
+    <p>
+      Analista Desenvolvedor de Sistemas com foco em soluções web e automações.
+    </p>
+  </header>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lincon Antunes Pereira | Portfólio</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Lincon Antunes Pereira</h1>
-      <p>
-        Analista Desenvolvedor de Sistemas com foco em soluções web e
-        automações.
-      </p>
-    </header>
+  <div class="blob"></div>
+  <!-- efeito de fundo suave -->
 
-    <section>
+  <section>
+    <div class="container">
       <h2>Projetos</h2>
 
-      <div class="projetos-placeholder">
+      <div class="projetos-placeholder reveal">
         <h3>
-          Projeto 1: Classificação e Resposta Inteligente de E-mails
-          <a href="https://github.com/LuckyLee89/Desafio-AutoU" target="_blank"
-            >🔗 GitHub</a
+          Respondo – Classificação e Resposta Inteligente de E-mails
+          <a
+            class="taglink"
+            href="https://github.com/LuckyLee89/Respondo.AI"
+            target="_blank"
           >
+            <span class="dot"></span> GitHub
+          </a>
         </h3>
         <p>
-          Aplicação web que utiliza NLP e IA para classificar e-mails recebidos
-          e sugerir respostas automáticas (PT/EN). Inclui autenticação com login
-          e logout, interface simples e integração com APIs de IA.
+          Aplicação web que usa NLP/IA para classificar e-mails e sugerir
+          respostas (PT/EN). Inclui login/logout e integrações configuráveis.
         </p>
       </div>
 
-      <div class="projetos-placeholder">
+      <div class="projetos-placeholder reveal">
         <h3>
-          Projeto 2: Kanaro – Termo de Consentimento
-          <a href="https://github.com/LuckyLee89/kanaro" target="_blank"
-            >🔗 GitHub</a
+          Kanaro – Termo de Consentimento
+          <a
+            class="taglink"
+            href="https://github.com/LuckyLee89/kanaro"
+            target="_blank"
           >
+            <span class="dot"></span> GitHub
+          </a>
         </h3>
         <p>
-          Sistema web desenvolvido para gerenciamento e assinatura digital de
-          termos de consentimento para cerimônias de ayahuasca. Inclui cadastro
-          de participantes, validação de dados e envio automático por e-mail.
+          Sistema de assinatura digital com validação de dados e envio por
+          e-mail. Pensado para cerimônias, com fluxo simples e seguro.
         </p>
       </div>
 
-      <div class="projetos-placeholder">
+      <div class="projetos-placeholder reveal">
         <h3>
-          Projeto 3: EcoLuz – Monitoramento de Consumo de Energia
-          <a href="https://github.com/LuckyLee89/EcoLuzApp" target="_blank"
-            >🔗 GitHub</a
+          EcoLuz – Monitoramento de Consumo de Energia
+          <a
+            class="taglink"
+            href="https://github.com/LuckyLee89/EcoLuzApp"
+            target="_blank"
           >
+            <span class="dot"></span> GitHub
+          </a>
         </h3>
         <p>
-          Aplicativo mobile em React Native para monitoramento de consumo
-          energético residencial. Integra-se ao Supabase para autenticação e
-          armazenamento, e conta com telas de histórico, gráficos e modo escuro
-          customizado.
+          App em React Native com Supabase, histórico, gráficos e modo escuro.
+          Foco em usabilidade e visual consistente.
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      &copy; 2025 Lincon Antunes Pereira. Todos os direitos reservados.
-    </footer>
-  </body>
-</html>
+  <section>
+    <div class="container contact">
+      <h2>Contato</h2>
+      <p>📧 <a href="mailto:linconp66@gmail.com">linconp66@gmail.com</a></p>
+      <p>
+        💼
+        <a
+          href="https://www.linkedin.com/in/lincon-antunes-pereira-41639678"
+          target="_blank"
+          >LinkedIn</a
+        >
+      </p>
+      <p>
+        💻 <a href="https://github.com/LuckyLee89" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Lincon Antunes Pereira. Todos os direitos reservados.
+  </footer>
+
+  <!-- Reveal on scroll: JS mínimo -->
+  <script>
+    const obs = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
