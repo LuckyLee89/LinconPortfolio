@@ -1,34 +1,20 @@
-// Marca que JS está ativo
-document.documentElement.classList.add('js');
+// Alternar tema (salva no localStorage)
+const toggleBtn = document.getElementById('theme-toggle');
+const root = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'light';
 
-// === MODO ESCURO / CLARO ===
-(function () {
-  const key = 'theme';
-  const saved = localStorage.getItem(key);
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const startTheme = saved || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', startTheme);
+root.setAttribute('data-theme', currentTheme);
+toggleBtn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
 
-  const btn = document.getElementById('themeToggle');
-  if (!btn) return;
-  const isDark = startTheme === 'dark';
-  btn.textContent = isDark ? '🌙' : '☀️';
-  btn.setAttribute('aria-pressed', String(isDark));
-})();
-
-// === TOGGLE ===
-document.getElementById('themeToggle')?.addEventListener('click', () => {
-  const el = document.documentElement;
-  const next = el.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  el.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  const btn = document.getElementById('themeToggle');
-  const isDark = next === 'dark';
-  btn.textContent = isDark ? '🌙' : '☀️';
-  btn.setAttribute('aria-pressed', String(isDark));
+toggleBtn.addEventListener('click', () => {
+  const newTheme =
+    root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', newTheme);
+  toggleBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme', newTheme);
 });
 
-// === REVEAL ===
+// Animação de revelação ao rolar
 const obs = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
@@ -38,6 +24,6 @@ const obs = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.12 },
+  { threshold: 0.15 },
 );
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
