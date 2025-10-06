@@ -6,17 +6,17 @@
 }
 
 [data-theme='amber'] {
-  --accent-h: 28;
-  --accent-s: 85%;
-  --accent-l: 50%;
+  html[data-palette='amber'] {
+    --accent-h: 28;
+    --accent-s: 85%;
+    --accent-l: 50%;
+  }
+  html[data-palette='purple'] {
+    --accent-h: 265;
+    --accent-s: 70%;
+    --accent-l: 60%;
+  }
 }
-
-[data-theme='purple'] {
-  --accent-h: 265;
-  --accent-s: 70%;
-  --accent-l: 60%;
-}
-
 /* ======== TOKENS ========= */
 :root {
   --accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
@@ -34,7 +34,7 @@
 }
 
 /* DARK THEME */
-[data-theme='dark'] {
+html[data-theme='dark'] {
   --bg: #08120d;
   --text: #e6edf3;
   --card: #101b15;

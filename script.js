@@ -1,28 +1,45 @@
-// Troca dark/light
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  document.documentElement.setAttribute(
-    'data-theme',
-    current === 'dark' ? 'light' : 'dark',
-  );
-  themeToggle.textContent = current === 'dark' ? '🌞' : '🌙';
+// ===================== INIT =====================
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-toggle');
+const paletteBtn = document.getElementById('palette-toggle');
+
+// estado inicial (com persistência)
+const savedTheme = localStorage.getItem('theme') || 'light'; // 'light' | 'dark'
+const savedPalette = localStorage.getItem('palette') || 'default'; // 'default' | 'amber' | 'purple'
+
+// aplica estado inicial
+root.setAttribute('data-theme', savedTheme);
+if (savedPalette !== 'default') root.setAttribute('data-palette', savedPalette);
+
+// ícones iniciais
+themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '🌞';
+paletteBtn.textContent =
+  savedPalette === 'amber' ? '🟠' : savedPalette === 'purple' ? '💜' : '💚';
+
+// ===================== THEME TOGGLE =====================
+themeBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  themeBtn.textContent = next === 'dark' ? '🌙' : '🌞';
 });
 
-// Troca paleta (emerald → amber → purple)
-const paletteToggle = document.getElementById('palette-toggle');
-const palettes = ['default', 'amber', 'purple'];
-let currentIndex = 0;
+// ===================== PALETTE TOGGLE =====================
+const order = ['default', 'amber', 'purple'];
+paletteBtn.addEventListener('click', () => {
+  const current = root.getAttribute('data-palette') || 'default';
+  const next = order[(order.indexOf(current) + 1) % order.length];
 
-paletteToggle.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % palettes.length;
-  const theme = palettes[currentIndex];
-  document.documentElement.setAttribute('data-theme', theme);
-  paletteToggle.textContent =
-    theme === 'amber' ? '🟠' : theme === 'purple' ? '💜' : '💚';
+  // aplica/remover atributo
+  if (next === 'default') root.removeAttribute('data-palette');
+  else root.setAttribute('data-palette', next);
+
+  localStorage.setItem('palette', next);
+  paletteBtn.textContent =
+    next === 'amber' ? '🟠' : next === 'purple' ? '💜' : '💚';
 });
 
-// Reveal animado ao rolar as areas de projeto
+// ===================== REVEAL ON SCROLL =====================
 const obs = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
