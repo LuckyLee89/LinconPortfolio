@@ -201,9 +201,36 @@ h2::after {
   transform: translateY(-2px);
 }
 
-/* Contato & footer */
-.contact p {
-  margin: 8px 0;
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: color-mix(in oklab, var(--accent) 80%, white);
+  text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 70%, transparent);
+}
+
+/* ===== LINKS DA SEÇÃO DE CONTATO ===== */
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.contact a:hover {
+  color: color-mix(in oklab, var(--accent) 80%, white);
+  transform: translateX(3px);
+}
+
+/* Remove o azul padrão de links visitados */
+.contact a:visited {
+  color: var(--accent);
 }
 footer {
   text-align: center;
