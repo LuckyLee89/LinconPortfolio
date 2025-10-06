@@ -22,7 +22,7 @@ paletteToggle.addEventListener('click', () => {
     theme === 'amber' ? '🟠' : theme === 'purple' ? '💜' : '💚';
 });
 
-// Reveal animado ao rolar
+// Reveal animado ao rolar as areas de projeto
 const obs = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
