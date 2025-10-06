@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,109 +8,33 @@
   </head>
   <body>
     <header>
+      <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Alternar tema">🌙</button>
       <h1>Lincon Antunes Pereira</h1>
-      <p>
-        Analista Desenvolvedor de Sistemas com foco em soluções web e
-        automações.
-      </p>
+      <p>Analista Desenvolvedor de Sistemas com foco em soluções web e automações.</p>
     </header>
 
     <div class="blob"></div>
-    <!-- efeito de fundo suave -->
 
     <section>
       <div class="container">
         <h2>Projetos</h2>
 
         <div class="projetos-placeholder reveal">
-          <h3>
-            Respondo – Classificação e Resposta Inteligente de E-mails
-            <a
-              class="taglink"
-              href="https://github.com/LuckyLee89/Respondo.AI"
-              target="_blank"
-            >
-              <span class="dot"></span> GitHub
-            </a>
-          </h3>
-          <p>
-            Aplicação web que usa NLP/IA para classificar e-mails e sugerir
-            respostas (PT/EN). Inclui login/logout e integrações configuráveis.
-          </p>
+          <h3>Respondo – Classificação e Resposta Inteligente de E-mails</h3>
+          <p>Aplicação web que usa NLP/IA para classificar e-mails e sugerir respostas (PT/EN). Inclui login/logout e integrações configuráveis.</p>
+          <div class="actions">
+            <a class="taglink" href="https://respondo-ai.exemplo.com" target="_blank">▶️ Ver Demonstração</a>
+            <a class="taglink" href="https://github.com/LuckyLee89/Respondo.AI" target="_blank"><span class="dot"></span> GitHub</a>
+          </div>
         </div>
 
         <div class="projetos-placeholder reveal">
-          <h3>
-            Kanaro – Termo de Consentimento
-            <a
-              class="taglink"
-              href="https://github.com/LuckyLee89/kanaro"
-              target="_blank"
-            >
-              <span class="dot"></span> GitHub
-            </a>
-          </h3>
-          <p>
-            Sistema de assinatura digital com validação de dados e envio por
-            e-mail. Pensado para cerimônias, com fluxo simples e seguro.
-          </p>
+          <h3>Kanaro – Termo de Consentimento</h3>
+          <p>Sistema de assinatura digital com validação de dados e envio por e-mail. Pensado para cerimônias, com fluxo simples e seguro.</p>
+          <div class="actions">
+            <a class="taglink" href="https://luckylee89.github.io/kanaro" target="_blank">▶️ Ver Demonstração</a>
+            <a class="taglink" href="https://github.com/LuckyLee89/kanaro" target="_blank"><span class="dot"></span> GitHub</a>
+          </div>
         </div>
 
-        <div class="projetos-placeholder reveal">
-          <h3>
-            EcoLuz – Monitoramento de Consumo de Energia
-            <a
-              class="taglink"
-              href="https://github.com/LuckyLee89/EcoLuzApp"
-              target="_blank"
-            >
-              <span class="dot"></span> GitHub
-            </a>
-          </h3>
-          <p>
-            App em React Native com Supabase, histórico, gráficos e modo escuro.
-            Foco em usabilidade e visual consistente.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container contact">
-        <h2>Contato</h2>
-        <p>📧 <a href="mailto:linconp66@gmail.com">linconp66@gmail.com</a></p>
-        <p>
-          💼
-          <a
-            href="https://www.linkedin.com/in/lincon-antunes-pereira-41639678"
-            target="_blank"
-            >LinkedIn</a
-          >
-        </p>
-        <p>
-          💻 <a href="https://github.com/LuckyLee89" target="_blank">GitHub</a>
-        </p>
-      </div>
-    </section>
-
-    <footer>
-      &copy; 2025 Lincon Antunes Pereira. Todos os direitos reservados.
-    </footer>
-
-    <!-- Reveal on scroll: JS mínimo -->
-    <script>
-      const obs = new IntersectionObserver(
-        entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              obs.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.12 },
-      );
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    </script>
-  </body>
-</html>
+        <div class="projetos-placeholder
