@@ -1,48 +1,70 @@
-/* ======== PALETAS ========= */
+/* ================== BASE (não define claro/escuro) ================== */
 :root {
-  --accent-h: 152; /* padrão: Emerald */
+  /* Paleta padrão = Emerald (altera só o acento) */
+  --accent-h: 152; /* 152=emerald | 28=amber | 265=purple */
   --accent-s: 70%;
   --accent-l: 44%;
-}
-
-[data-theme='amber'] {
-  html[data-palette='amber'] {
-    --accent-h: 28;
-    --accent-s: 85%;
-    --accent-l: 50%;
-  }
-  html[data-palette='purple'] {
-    --accent-h: 265;
-    --accent-s: 70%;
-    --accent-l: 60%;
-  }
-}
-/* ======== TOKENS ========= */
-:root {
   --accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
   --accent-soft: hsla(var(--accent-h), 85%, 45%, 0.15);
+
+  /* tokens comuns */
   --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 
-/* LIGHT THEME */
-:root {
+/* ================== THEMES (claro/escuro) ================== */
+html[data-theme='light'] {
   --bg: #f7f9fa;
   --text: #111827;
   --card: #ffffff;
   --muted: #4b5563;
-  --gradient: linear-gradient(180deg, #eefcf5, #d5f5de);
+  --shadow: 0 10px 30px rgba(9, 18, 12, 0.1);
+  --gradient: linear-gradient(180deg, #eefcf5, #d5f5de); /* Emerald light */
 }
-
-/* DARK THEME */
 html[data-theme='dark'] {
   --bg: #08120d;
   --text: #e6edf3;
   --card: #101b15;
   --muted: #9ca3af;
-  --gradient: linear-gradient(180deg, #00170f, #032816);
+  --shadow: 0 12px 44px rgba(0, 0, 0, 0.55);
+  --gradient: linear-gradient(180deg, #00170f, #032816); /* Emerald dark */
 }
 
-/* ======== GLOBAIS ========= */
+/* ================== PALETES (somente HUE do acento) ================== */
+html[data-palette='amber'] {
+  --accent-h: 28;
+  --accent-s: 85%;
+  --accent-l: 50%;
+}
+html[data-palette='purple'] {
+  --accent-h: 265;
+  --accent-s: 70%;
+  --accent-l: 60%;
+}
+
+/* ================== COMBINAÇÕES (ajustes finos por tema+paleta) ================== */
+/* LIGHT + AMBER */
+html[data-theme='light'][data-palette='amber'] {
+  --gradient: linear-gradient(180deg, #fff6ea, #ffe9cc);
+  --card: #ffffff;
+}
+/* DARK + AMBER */
+html[data-theme='dark'][data-palette='amber'] {
+  --gradient: linear-gradient(180deg, #1a1206, #2a1b08);
+  --card: #161006;
+}
+
+/* LIGHT + PURPLE */
+html[data-theme='light'][data-palette='purple'] {
+  --gradient: linear-gradient(180deg, #f6f0ff, #eadfff);
+  --card: #ffffff;
+}
+/* DARK + PURPLE */
+html[data-theme='dark'][data-palette='purple'] {
+  --gradient: linear-gradient(180deg, #140c1f, #20122f);
+  --card: #160d24;
+}
+
+/* ================== GLOBAIS ================== */
 html,
 body {
   margin: 0;
@@ -54,7 +76,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ======== HEADER ========= */
 header {
   text-align: center;
   padding: 70px 20px;
@@ -66,7 +87,6 @@ header {
   );
   animation: floatBg 14s ease-in-out infinite alternate;
 }
-
 @keyframes floatBg {
   0% {
     background-position: 0% 0%;
@@ -75,7 +95,6 @@ header {
     background-position: 100% 50%;
   }
 }
-
 header h1 {
   margin: 0;
   font-size: clamp(32px, 4vw, 46px);
@@ -87,7 +106,7 @@ header p {
   animation: fadeInUp 1.5s ease;
 }
 
-/* ======== BOTÕES DE TEMA ========= */
+/* Botões fixos (tema e paleta) */
 #theme-toggle,
 #palette-toggle {
   position: fixed;
@@ -99,18 +118,18 @@ header p {
   cursor: pointer;
   color: var(--text);
   transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+#palette-toggle {
+  right: 60px;
 }
 #theme-toggle:hover,
 #palette-toggle:hover {
   transform: scale(1.2);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-#palette-toggle {
-  right: 60px;
-}
-
-/* ======== CONTEÚDO ========= */
+/* Conteúdo */
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -118,7 +137,7 @@ header p {
   animation: fadeInUp 1s ease;
 }
 
-/* ======== TÍTULOS ========= */
+/* Títulos de seção */
 h2 {
   font-size: 1.6rem;
   margin-bottom: 24px;
@@ -132,10 +151,10 @@ h2::after {
   border-radius: 3px;
   background: var(--accent);
   margin-top: 6px;
-  animation: growLine 1.5s ease forwards;
+  animation: growLine 1.2s ease forwards;
 }
 
-/* ======== CARDS ========= */
+/* Cards de projeto */
 .projeto {
   background: var(--card);
   border-radius: 20px;
@@ -146,15 +165,15 @@ h2::after {
   transform: translateY(20px);
   animation: revealCard 0.8s ease forwards;
   animation-delay: 0.3s;
-  border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+  border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease,
+    background 0.4s ease;
 }
 .projeto:hover {
   transform: translateY(-6px) scale(1.01);
   border-color: var(--accent);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
-
 .projeto h3 {
   margin-top: 0;
 }
@@ -163,17 +182,17 @@ h2::after {
   margin-bottom: 12px;
 }
 
-/* BOTÕES (GITHUB / DEMO) */
+/* Botões de ação (GitHub / Demo) */
 .actions a {
   display: inline-block;
   margin-right: 10px;
   padding: 8px 16px;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--accent) 80%, var(--card));
-  color: var(--text);
   text-decoration: none;
-  background: color-mix(in oklab, var(--card) 90%, var(--accent) 5%);
+  color: var(--text);
+  border: 1px solid color-mix(in oklab, var(--accent) 80%, var(--card));
+  background: color-mix(in oklab, var(--card) 90%, var(--accent) 6%);
   transition: all 0.3s ease;
 }
 .actions a:hover {
@@ -182,21 +201,30 @@ h2::after {
   transform: translateY(-2px);
 }
 
-/* ======== CONTATO ========= */
+/* Contato & footer */
 .contact p {
   margin: 8px 0;
 }
-
-/* ======== FOOTER ========= */
 footer {
   text-align: center;
   padding: 30px;
   color: var(--muted);
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* ======== ANIMAÇÕES ========= */
+/* Reveal-on-scroll (classe .visible aplicada no JS) */
+.reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animações utilitárias */
 @keyframes fadeInDown {
   from {
     opacity: 0;
