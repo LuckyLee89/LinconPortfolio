@@ -1,20 +1,28 @@
-// Alternar tema (salva no localStorage)
-const toggleBtn = document.getElementById('theme-toggle');
-const root = document.documentElement;
-const currentTheme = localStorage.getItem('theme') || 'light';
-
-root.setAttribute('data-theme', currentTheme);
-toggleBtn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
-
-toggleBtn.addEventListener('click', () => {
-  const newTheme =
-    root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  root.setAttribute('data-theme', newTheme);
-  toggleBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-  localStorage.setItem('theme', newTheme);
+// Troca dark/light
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute(
+    'data-theme',
+    current === 'dark' ? 'light' : 'dark',
+  );
+  themeToggle.textContent = current === 'dark' ? '🌞' : '🌙';
 });
 
-// Animação de revelação ao rolar
+// Troca paleta (emerald → amber → purple)
+const paletteToggle = document.getElementById('palette-toggle');
+const palettes = ['default', 'amber', 'purple'];
+let currentIndex = 0;
+
+paletteToggle.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % palettes.length;
+  const theme = palettes[currentIndex];
+  document.documentElement.setAttribute('data-theme', theme);
+  paletteToggle.textContent =
+    theme === 'amber' ? '🟠' : theme === 'purple' ? '💜' : '💚';
+});
+
+// Reveal animado ao rolar
 const obs = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
@@ -24,6 +32,6 @@ const obs = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.15 },
+  { threshold: 0.12 },
 );
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('.projeto').forEach(el => obs.observe(el));

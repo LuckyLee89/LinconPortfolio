@@ -1,23 +1,48 @@
+/* ======== PALETAS ========= */
+:root {
+  --accent-h: 152; /* padrão: Emerald */
+  --accent-s: 70%;
+  --accent-l: 44%;
+}
+
+[data-theme='amber'] {
+  --accent-h: 28;
+  --accent-s: 85%;
+  --accent-l: 50%;
+}
+
+[data-theme='purple'] {
+  --accent-h: 265;
+  --accent-s: 70%;
+  --accent-l: 60%;
+}
+
+/* ======== TOKENS ========= */
+:root {
+  --accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
+  --accent-soft: hsla(var(--accent-h), 85%, 45%, 0.15);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* LIGHT THEME */
 :root {
   --bg: #f7f9fa;
   --text: #111827;
   --card: #ffffff;
-  --accent: #22c55e;
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   --muted: #4b5563;
-  --gradient: linear-gradient(180deg, #e0f7ec, #c7f5d3);
+  --gradient: linear-gradient(180deg, #eefcf5, #d5f5de);
 }
 
+/* DARK THEME */
 [data-theme='dark'] {
-  --bg: #0b0f14;
+  --bg: #08120d;
   --text: #e6edf3;
-  --card: #111827;
-  --accent: #22c55e;
-  --shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+  --card: #101b15;
   --muted: #9ca3af;
-  --gradient: linear-gradient(180deg, #001b10, #052b18);
+  --gradient: linear-gradient(180deg, #00170f, #032816);
 }
 
+/* ======== GLOBAIS ========= */
 html,
 body {
   margin: 0;
@@ -25,20 +50,35 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--gradient);
   color: var(--text);
-  transition: background 0.6s ease, color 0.6s ease;
+  transition: background 0.8s ease, color 0.8s ease;
+  overflow-x: hidden;
 }
 
+/* ======== HEADER ========= */
 header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 70px 20px;
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(120deg, rgba(34, 197, 94, 0.15), transparent 70%);
+  background: radial-gradient(
+    circle at 50% -20%,
+    var(--accent-soft),
+    transparent 70%
+  );
+  animation: floatBg 14s ease-in-out infinite alternate;
+}
+
+@keyframes floatBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 header h1 {
   margin: 0;
-  font-size: clamp(32px, 4vw, 42px);
+  font-size: clamp(32px, 4vw, 46px);
   animation: fadeInDown 1.2s ease;
 }
 header p {
@@ -47,60 +87,74 @@ header p {
   animation: fadeInUp 1.5s ease;
 }
 
-#theme-toggle {
-  position: absolute;
-  top: 20px;
+/* ======== BOTÕES DE TEMA ========= */
+#theme-toggle,
+#palette-toggle {
+  position: fixed;
+  top: 18px;
   right: 24px;
   font-size: 20px;
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  color: var(--text);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-#theme-toggle:hover {
+#theme-toggle:hover,
+#palette-toggle:hover {
   transform: scale(1.2);
+  opacity: 0.8;
 }
 
-/* CONTAINER */
+#palette-toggle {
+  right: 60px;
+}
+
+/* ======== CONTEÚDO ========= */
 .container {
   max-width: 960px;
   margin: 0 auto;
   padding: 40px 20px;
+  animation: fadeInUp 1s ease;
 }
 
-/* TÍTULOS */
+/* ======== TÍTULOS ========= */
 h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
+  margin-bottom: 24px;
   position: relative;
 }
 h2::after {
   content: '';
   display: block;
-  width: 70px;
+  width: 72px;
   height: 3px;
-  border-radius: 2px;
+  border-radius: 3px;
   background: var(--accent);
   margin-top: 6px;
   animation: growLine 1.5s ease forwards;
 }
 
-/* CARDS DE PROJETO */
+/* ======== CARDS ========= */
 .projeto {
   background: var(--card);
-  border-radius: 18px;
+  border-radius: 20px;
   box-shadow: var(--shadow);
   padding: 24px;
-  margin: 20px 0;
-  transform: translateY(10px);
+  margin: 24px 0;
   opacity: 0;
-  animation: slideUp 0.8s ease forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(20px);
+  animation: revealCard 0.8s ease forwards;
+  animation-delay: 0.3s;
+  border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
 }
 .projeto:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--accent);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
+
 .projeto h3 {
   margin-top: 0;
 }
@@ -109,39 +163,44 @@ h2::after {
   margin-bottom: 12px;
 }
 
+/* BOTÕES (GITHUB / DEMO) */
 .actions a {
   display: inline-block;
   margin-right: 10px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent) 80%, var(--card));
   color: var(--text);
   text-decoration: none;
+  background: color-mix(in oklab, var(--card) 90%, var(--accent) 5%);
   transition: all 0.3s ease;
 }
 .actions a:hover {
   background: var(--accent);
   color: #fff;
+  transform: translateY(-2px);
 }
 
-/* CONTATO */
+/* ======== CONTATO ========= */
 .contact p {
-  margin: 6px 0;
+  margin: 8px 0;
 }
 
-/* FOOTER */
+/* ======== FOOTER ========= */
 footer {
   text-align: center;
   padding: 30px;
   color: var(--muted);
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
-/* ANIMAÇÕES */
+/* ======== ANIMAÇÕES ========= */
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-25px);
   }
   to {
     opacity: 1;
@@ -151,14 +210,8 @@ footer {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(25px);
   }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes slideUp {
   to {
     opacity: 1;
     transform: none;
@@ -169,17 +222,12 @@ footer {
     width: 0;
   }
   to {
-    width: 70px;
+    width: 72px;
   }
 }
-
-/* SCROLL REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: all 0.8s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: none;
+@keyframes revealCard {
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
